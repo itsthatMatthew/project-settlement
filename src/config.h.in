@@ -1,0 +1,7 @@
+#ifndef CMAKE_CONFIG_H
+#define CMAKE_CONFIG_H
+
+#define TEST_MSG "@TEST_MSG@"
+#define SELECTED_OS_TEXT "@SELECTED_OS@"
+
+#endif

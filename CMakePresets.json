@@ -1,0 +1,84 @@
+
+
+{
+   "version": 10,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "debug",
+      "displayName": "Debug",
+      "description": "Default build using Ninja generator",
+      "generator": "Ninja",
+      "binaryDir": "build/debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "SELECTED_OS": {
+            "type": "string",
+            "value": "${hostSystemName}"}
+      }
+    },
+    {
+      "name": "release",
+      "displayName": "Release",
+      "generator": "Ninja",
+      "binaryDir": "build/release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "debug-ci-gcc",
+      "inherits": "debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "windows-only",
+      "inherits": "debug",
+      "displayName": "Windows-only configuration",
+      "description": "This build is only available on Windows",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "app-debug",
+      "displayName": "App Debug Build",
+      "configurePreset": "debug",
+      "configuration": "Debug"
+    },
+    {
+      "name": "app-release",
+      "displayName": "App Release Build",
+      "configurePreset": "release",
+      "configuration": "Release",
+      "targets": ["App"]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-all",
+      "displayName": "Test All",
+      "configurePreset": "debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "stopOnFailure": true
+      }
+    }
+  ]
+}
+
+
