@@ -3,6 +3,9 @@ add_executable(main main.cpp)
 
 # Optionally link any libraries that are needed by the binary
 
+# Link to the actual SDL3 library.
+target_link_libraries(main PRIVATE SDL3::SDL3)
+
 # Set up configure file to have access to CMake variables inside the code
 configure_file( config.h.in ${CMAKE_BINARY_DIR}/generated/config.h )
 # Make sure it can be included...
